@@ -9,8 +9,8 @@ To run this project, please follow the steps below:
 1. Clone the repository:
 
 ```shell
-git clone https://github.com/your-username/provinces-api.git
-cd provinces-api
+git clone https://github.com/sudan94/nepal-provience-district.git
+cd nepal-provience-district
 ```
 
 2. Create and activate a virtual environment (optional but recommended):
@@ -46,7 +46,7 @@ Once the FastAPI server is running, you can access the API endpoints using a web
 
 The API provides the following endpoints:
 
-- http://127.0.0.1:8000/docs All endpints can found here
+- Once the app is running all endpints can found here http://127.0.0.1:8000/docs
 
 
 ## Data Source
@@ -67,5 +67,4 @@ If you'd like to contribute to this project, you can follow these steps:
 
 This project is licensed under the [MIT License](LICENSE).
 
-## Contact
 
