@@ -6,7 +6,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
   <link rel="stylesheet" href="/css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
+<style>
+  .select {
+      width: 100%;
+  }
+</style>
 <body>
   <div class="header">
     <h2>S.U</h2>
@@ -18,10 +24,75 @@
     <a href="https://neapl-provience-district.onrender.com/docs">Visit the documentation</a>
   </div>
 
+  <div class="container">
+    <h1>Use Case</h1>
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="provence">Province</label>
+        <select class="select" id="provence">
+          <option value="">Please select province</option>
+      </select>
+      </div>
+      <div class="col-md-6">
+        <label for="district">District</label>
+      <select class="select" id="district">
+        <option value="">Please select province First</option>
+    </select>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-md-12">
+        <p class="fw-lighter">This is an example to show the use case of the API. District get updated when chaning the Province. You can find the code for this example in the <a href="https://github.com/sudan94/nepal-provience-district/blob/main/static/index.html" target="_blank">here.</a></p>
+      </div>
+    </div>
+  </div>
+
   <div class="footer">
     <p>Created by &copy; Sudan 2023</p>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+  $(document).ready(function () {
+      $('#district').select2({});
+      $.ajax({
+          url: 'https://neapl-provience-district.onrender.com/province',
+          type: 'get',
+          dataType: 'json',
+          success: function (jsonObject) {
+              originalData = jsonObject.result
+              const transformedData = Object.entries(originalData).map(([id, text]) => ({
+                  id: text,
+                  text
+              }));
+              console.log(transformedData);
+              $('#provence').select2({ data: transformedData });
+          }
+      });
+  });
+
+  $('#provence').change(function () {
+      $('#district').empty();
+      $.ajax({
+          url: 'https://neapl-provience-district.onrender.com/district/' + $(this).val(),
+          type: 'get',
+          dataType: 'json',
+          success: function (jsonObject) {
+              originalData = jsonObject.result
+              let transformedData = [];
+              transformedData = Object.entries(originalData).map(([id, text]) => ({
+                  id: text,
+                  text
+              }));
+              console.log(transformedData);
+              $('#district').select2({ data: transformedData });
+
+          }
+      });
+  })
+</script>
 </html>

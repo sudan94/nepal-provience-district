@@ -50,3 +50,6 @@ body {
     text-align: center;
     margin-top: 26%;
   }
+  .select {
+    width: 100%;
+}
