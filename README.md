@@ -2,6 +2,10 @@
 
 This is a FastAPI project that provides an API to retrieve information about provinces, districts, and municipalities in Nepal. The project uses Python and the FastAPI framework.
 
+## Endpoints 
+
+- All the endpoints can be found here https://neapl-provience-district.onrender.com/
+
 ## Installation
 
 To run this project, please follow the steps below:
