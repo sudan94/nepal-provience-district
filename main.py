@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src import en
 from fastapi.openapi.utils import get_openapi
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
@@ -19,3 +20,4 @@ async def health():
 
 # districts of nepal api
 app.include_router(en.router)
+app.mount("/", StaticFiles(directory="static",html = True), name="index")
